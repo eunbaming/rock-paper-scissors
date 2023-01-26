@@ -1,17 +1,44 @@
 .main {
   display: flex;
   justify-content: center;
+  margin-top: 1em;
+}
+.main button {
+  margin: 10px;
+  border: none;
+  background-color: #fff;
+  color: purple;
+  font-size: 20px;
+  cursor: pointer;
+}
+.main button:hover {
+  color: aqua;
 }
 .choice-card {
   margin: 10px;
   border: 10px solid #000;
   padding: 20px;
   width: 600px;
-  height: 600px;
+  height: 550px;
   /* box-sizing: border-box; */
   text-align: center;
 }
 .item-img {
   width: 400px;
   height: 400px;
+}
+
+.Win {
+  border: 10px solid green;
+  color: green;
+}
+
+.Lose {
+  border: 10px solid red;
+  color: red;
+}
+
+.Tie {
+  border: 10px solid #000;
+  color: #000;
 }

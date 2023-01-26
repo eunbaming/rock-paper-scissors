@@ -21,12 +21,14 @@ const choice = {
 function App() {
   const [userSelect, setUserSelect] = useState(null)
   const [computerSelect, setComputerSelect] = useState(null)
+  const [result, setResult] = useState("")
 
   const play = (userChoice) => {
     console.log("선택됨", userChoice)
     setUserSelect(choice[userChoice])
     let computerChoice = randomChoice()
     setComputerSelect(computerChoice)
+    setResult(judgement(choice[userChoice], computerChoice))
   }
 
   const randomChoice = () => {
@@ -38,16 +40,25 @@ function App() {
     return choice[final]
   }
 
+  const judgement = (user, computer) => {
+    // console.log(user, computer)
+    if (user.name === computer.name) {
+      return "Tie"
+    } else if (user.name === "Rock") return computer.name === "Scissors" ? "Win" : "Lose"
+    else if (user.name === "Scissors") return computer.name === "Paper" ? "Win" : "Lose"
+    else if (user.name === "Paper") return computer.name === "Rock" ? "Win" : "Lose"
+  }
+
   return (
     <div>
       <div className='main'>
-      <Box title='You' item={userSelect}></Box>
-      <Box title='Computer' item={computerSelect}></Box>
+      <Box title='You' item={userSelect} result = {result}></Box>
+      <Box title='Computer' item={computerSelect} result = {result}></Box>
     </div>
     <div className='main'>
-      <button onClick={() => play("scissors")}>가위</button>
-      <button onClick={() => play("rock")}>바위</button>
-      <button onClick={() => play("paper")}>보</button>
+      <button onClick={() => play("rock")}>Rock</button>
+      <button onClick={() => play("scissors")}>Scissors</button>
+      <button onClick={() => play("paper")}>Paper</button>
     </div>
     </div>
   );
