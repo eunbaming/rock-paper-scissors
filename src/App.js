@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import {useState} from 'react'
 import './App.css';
 import Box from './component/Box'
 
@@ -9,7 +10,7 @@ const choice = {
   },
   scissors: {
     name: "Scissors",
-    img: "https://st4.depositphotos.com/24038622/27074/v/1600/depositphotos_270744526-stock-illustration-scissors-cartoon-illustration-pair-scissors.jpg"
+    img: "http://www.pngmart.com/files/1/Scissors-PNG-Pic.png"
   },
   paper : {
     name: "Paper",
@@ -18,15 +19,30 @@ const choice = {
 }
 
 function App() {
+  const [userSelect, setUserSelect] = useState(null)
+  const [computerSelect, setComputerSelect] = useState(null)
+
   const play = (userChoice) => {
     console.log("선택됨", userChoice)
+    setUserSelect(choice[userChoice])
+    let computerChoice = randomChoice()
+    setComputerSelect(computerChoice)
+  }
+
+  const randomChoice = () => {
+    let itemArray = Object.keys(choice)
+    let randomItem = Math.floor(Math.random() * itemArray.length)
+    console.log("randomItem", randomItem)
+    let final = itemArray[randomItem]
+    console.log(final)
+    return choice[final]
   }
 
   return (
     <div>
       <div className='main'>
-      <Box title='You'></Box>
-      <Box title='Computer'></Box>
+      <Box title='You' item={userSelect}></Box>
+      <Box title='Computer' item={computerSelect}></Box>
     </div>
     <div className='main'>
       <button onClick={() => play("scissors")}>가위</button>
